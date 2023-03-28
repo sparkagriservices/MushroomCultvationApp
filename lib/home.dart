@@ -172,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     'STATUS SHEET',
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       height: 1,
                                       fontWeight: FontWeight.bold,
                                     ),
