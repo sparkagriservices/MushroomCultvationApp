@@ -1,4 +1,16 @@
-# MushroomCultvationApp
-an automation app for mushroom growers that simplifies and streamlines the cultivation process. With its user-friendly interface and advanced features, this app is designed to help you grow mushrooms with ease and efficiency.
+# demoapp
 
-APP_V1- Under Testing.
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
