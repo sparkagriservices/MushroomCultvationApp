@@ -135,10 +135,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(60.0)),
                   child: Container(
+                    //color: Colors.amberAccent,
                     color: Colors.white.withOpacity(0.9),
                     child: ListView(
                       controller: myScrollController,
                       children: [
+                        Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          height: 35,
+                          color: Colors.white10,
+                          child: Center(
+                            child: Container(
+                              height: 8,
+                              width: width * 0.18,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(7),
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                          ),
+                        ),
                         Container(
                           height: height * 0.12,
                           color: Colors.white10,
@@ -450,11 +466,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                         ),
-                        Container(
-                          height: 500,
-                          color: Colors.lightBlue,
-                          child: Center(child: MainScreen()),
-                        )
+                        //Container(
+                        //  height: 500,
+                        //  color: Colors.lightBlue,
+                        //  child: Center(child: MainScreen()),
+                        //)
                       ],
                     ),
                   ),
