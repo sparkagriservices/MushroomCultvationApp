@@ -1,3 +1,4 @@
+import 'package:demoapp/weather_data.dart';
 import 'package:flutter/material.dart';
 import 'package:demoapp/sub/FrostedGlass.dart';
 import 'package:demoapp/sub/DropDown.dart';
@@ -5,19 +6,23 @@ import 'package:demoapp/sub/Temperature.dart';
 import 'package:demoapp/sub/Humidity.dart';
 import 'package:demoapp/mainscreen.dart';
 
+var temperature = WeatherData.instance.weather?.temperature;
+var state = WeatherData.instance.weather?.condition;
+
+
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   get myScrollController => null;
-
   @override
   Widget build(BuildContext context) {
+    print(temperature);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -50,10 +55,25 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.grey[300],
                         margin: const EdgeInsets.fromLTRB(25, 12, 25, 0),
                         padding: const EdgeInsets.fromLTRB(60.0, 0.2, 0.0, 0.2),
-                        child: const Image(
-                          image: AssetImage('images/cloud.png'),
+                        child: Stack(
+                          children: [
+                            const Image(
+                          image: AssetImage('images/cloud.png')
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Text("$temperature°C\n$state",
+                            style:TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              fontSize: 10,
+                            ),
+                            ),
+                          ),
+                          ],
+                        )
                         ),
-                      ),
+                    
                     ],
                   ),
                 ),
@@ -135,26 +155,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(60.0)),
                   child: Container(
-                    //color: Colors.amberAccent,
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withOpacity(1),
                     child: ListView(
                       controller: myScrollController,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 20),
-                          height: 35,
-                          color: Colors.white10,
-                          child: Center(
-                            child: Container(
-                              height: 8,
-                              width: width * 0.18,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                color: Colors.grey[400],
-                              ),
-                            ),
-                          ),
-                        ),
                         Container(
                           height: height * 0.12,
                           color: Colors.white10,
@@ -188,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     'STATUS SHEET',
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       height: 1,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -466,11 +470,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                         ),
-                        //Container(
-                        //  height: 500,
-                        //  color: Colors.lightBlue,
-                        //  child: Center(child: MainScreen()),
-                        //)
+                        Container(
+                          height: 500,
+                          color: Colors.lightBlue,
+                          child: Center(child: MainScreen()),
+                        )
                       ],
                     ),
                   ),

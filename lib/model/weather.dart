@@ -1,19 +1,22 @@
 class Weather {
-  final double temperatureC;
-  final double temperatureF;
+  final double temperature;
   final String condition;
+  final String iconCode;
 
   Weather({
-    this.temperatureC = 0,
-    this.temperatureF = 0,
-    this.condition = "Sunny",
+    required this.temperature,
+    required this.condition,
+    required this.iconCode,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) {
+    final temperature = json['main']['temp'];
+    final condition = json['weather'][0]['main'];
+    final iconCode = json['weather'][0]['icon'];
     return Weather(
-      temperatureC: json['current']['temp_c'],
-      temperatureF: json['current']['temp_f'],
-      condition: json['current']['condition']['text'],
+      temperature: temperature,
+      condition: condition,
+      iconCode: iconCode,
     );
   }
 }
