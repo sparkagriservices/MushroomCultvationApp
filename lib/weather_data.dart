@@ -1,15 +1,19 @@
-import 'package:demoapp/model/weather.dart';
+import 'package:flutter/foundation.dart';
+
+import 'model/weather.dart';
 
 class WeatherData {
-  WeatherData._privateConstructor();
+  static final WeatherData instance = WeatherData._internal();
 
-  static final WeatherData instance = WeatherData._privateConstructor();
+  WeatherData._internal();
 
-  Weather? _weather;
+  final _weather = ValueNotifier<Weather?>(null);
 
-  Weather? get weather => _weather;
+  Weather? get weather => _weather.value;
 
   setWeather(Weather weather) {
-    _weather = weather;
+    _weather.value = weather;
   }
+
+  ValueListenable<Weather?> get weatherListenable => _weather;
 }

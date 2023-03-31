@@ -1,3 +1,5 @@
+import 'package:android_intent/android_intent.dart';
+import 'package:demoapp/services/weather_service.dart';
 import 'package:demoapp/weather_data.dart';
 import 'package:flutter/material.dart';
 import 'package:demoapp/sub/FrostedGlass.dart';
@@ -5,9 +7,11 @@ import 'package:demoapp/sub/DropDown.dart';
 import 'package:demoapp/sub/Temperature.dart';
 import 'package:demoapp/sub/Humidity.dart';
 import 'package:demoapp/mainscreen.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-var temperature = WeatherData.instance.weather?.temperature;
-var state = WeatherData.instance.weather?.condition;
+import 'model/weather.dart';
+
 
 
 
@@ -20,8 +24,58 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   get myScrollController => null;
+  late Future<Weather> _weatherData;
+  final _weatherService = WeatherService();
+  late double _latitude;
+  late double _longitude;
+
+  @override
+  void initState() {
+    super.initState();
+    locateUser();
+  }
+
+  void locateUser() async {
+    if (await Permission.location.serviceStatus.isEnabled) {
+      var status = await Permission.location.status;
+      if (status.isGranted) {
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high);
+        setState(() {
+          _latitude = position.latitude;
+          _longitude = position.longitude;
+        });
+        _fetchWeatherData();
+      } else if (status.isDenied) {
+        // ignore: unused_local_variable
+        Map<Permission, PermissionStatus> status = await [
+          Permission.location,
+        ].request();
+
+        if (await Permission.location.isPermanentlyDenied) {
+          openAppSettings();
+          _fetchWeatherData();
+        }
+      }
+    } else {
+      const AndroidIntent intent = AndroidIntent(
+          action: 'android.settings.LOCATION_SOURCE_SETTINGS');
+      await intent.launch();
+    }
+  }
+
+  void _fetchWeatherData() async {
+  final weather = await _weatherService.fetchWeatherData(_latitude, _longitude);
+  WeatherData.instance.setWeather(weather);
+  setState(() {
+    _weatherData = Future.value(weather);
+  });
+}
+
   @override
   Widget build(BuildContext context) {
+    var temperature = WeatherData.instance.weather?.temperature;
+  var state = WeatherData.instance.weather?.condition;
     print(temperature);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -62,12 +116,22 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             alignment: Alignment.center,
-                            child: Text("$temperature°C\n$state",
-                            style:TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat',
-                              fontSize: 10,
-                            ),
+                            child: RichText(
+                                text: TextSpan(
+                                text: "$temperature°C",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: "Montserrat",
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: "\n$state",
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      )
+                                    )
+                                  ]),
                             ),
                           ),
                           ],
@@ -470,11 +534,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                         ),
-                        Container(
-                          height: 500,
-                          color: Colors.lightBlue,
-                          child: Center(child: MainScreen()),
-                        )
+                       
                       ],
                     ),
                   ),
