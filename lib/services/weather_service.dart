@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:demoapp/model/weather.dart';
+import 'package:Spark/model/weather.dart';
 
 class WeatherService {
   final apiKey = '74e7af90fc7fcc56433d4eec6b4ceab4'; // Replace with your API key

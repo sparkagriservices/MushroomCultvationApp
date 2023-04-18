@@ -1,17 +1,16 @@
 import 'package:android_intent/android_intent.dart';
-import 'package:demoapp/services/weather_service.dart';
-import 'package:demoapp/weather_data.dart';
+import 'package:Spark/services/weather_service.dart';
+import 'package:Spark/weather_data.dart';
 import 'package:flutter/material.dart';
-import 'package:demoapp/sub/FrostedGlass.dart';
-import 'package:demoapp/sub/DropDown.dart';
-import 'package:demoapp/sub/Temperature.dart';
-import 'package:demoapp/sub/Humidity.dart';
-import 'package:demoapp/mainscreen.dart';
+import 'package:Spark/sub/FrostedGlass.dart';
+import 'package:Spark/sub/DropDown.dart';
+import 'package:Spark/sub/Temperature.dart';
+import 'package:Spark/sub/Humidity.dart';
+import 'package:Spark/mainscreen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'model/weather.dart';
-
 
 
 
@@ -32,6 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
     locateUser();
   }
 
@@ -212,8 +212,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             DraggableScrollableSheet(
               initialChildSize: 0.3,
+              snap: true,
               minChildSize: 0.3,
-              maxChildSize: 0.8,
+              maxChildSize: 0.85,
               builder: (BuildContext context, myScrollController) {
                 return ClipRRect(
                   borderRadius:
@@ -223,6 +224,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ListView(
                       controller: myScrollController,
                       children: [
+                        Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            height: 35,
+                            color: Colors.white10,
+                            child: Center(
+                              child: Container(
+                                height: 8,
+                                width: width * 0.12,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7),
+                                  color: Colors.grey[400],
+                                ),
+                              ),
+                            ),
+                        ),
                         Container(
                           height: height * 0.12,
                           color: Colors.white10,

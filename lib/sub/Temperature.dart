@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+
+
 
 class TemperatureGraph extends StatelessWidget {
+ 
   const TemperatureGraph(
       {Key? key,
       required this.theWidth,
@@ -17,6 +22,14 @@ class TemperatureGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var temp;
+    var humid;
+     DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+     dbRef.child("Mushroom_Cultivation").onValue.listen((event) {
+      var parser = event.snapshot.value;
+      print(parser);
+      //temp = parser["Temperature"];
+     });
     double theWidth = MediaQuery.of(context).size.width;
     double theHeight = MediaQuery.of(context).size.height;
     return ClipRRect(

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "441448485611",
+    "firebase_url": "https://mushroom-dd2b5-default-rtdb.firebaseio.com",
+    "project_id": "mushroom-dd2b5",
+    "storage_bucket": "mushroom-dd2b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441448485611:android:3e93f8f6024b86717264ae",
+        "android_client_info": {
+          "package_name": "com.example.demoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441448485611-1p144svdc8jvoktl5s3hgd1k3aip6n2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6wrYN_NUjayFpEPaaJZpHqYiJt3EmYMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441448485611-1p144svdc8jvoktl5s3hgd1k3aip6n2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
